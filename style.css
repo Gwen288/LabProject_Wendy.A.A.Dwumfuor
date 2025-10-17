@@ -2,20 +2,27 @@
 body{
     height: 100vh;
     margin:0px;
-  /*  background-color: lightgrey;*/
-    background: linear-gradient(to bottom, #e91e63, #3f51b5);
+  /* look into these three  background-color: lightgrey;*/
+    background: linear-gradient(to bottom,rgba(233, 30, 99, 0.99),
+    rgba(63, 81, 181, 0.99)),url(attendance\ image.jpg);
+    background-blend-mode: multiply;
+    backdrop-filter: blur(3px);
+
 }
 
 
 .card{
     /*background: linear-gradient(to bottom, #e91e63, #3f51b5);*/
-    background-color: lightgrey;
     margin: auto;
-    margin-top: 40px;
+    margin-top: 60px;
     background-color: white;
     width:400px;
     border:1px solid black;
     padding-bottom: 50px;
+    /* look into these two */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+
 }
 
 #layer{
@@ -60,7 +67,7 @@ body{
 }
 
 button{
-    background-color: lightskyblue;
+    background-color:#64b5f6;
     margin-top: 20px;
     cursor: pointer;
     height:40px;
