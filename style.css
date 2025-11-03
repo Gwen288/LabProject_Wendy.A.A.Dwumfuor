@@ -4,7 +4,7 @@ body{
     margin:0px;
   /* look into these three  background-color: lightgrey;*/
     background: linear-gradient(to bottom,rgba(233, 30, 99, 0.99),
-    rgba(63, 81, 181, 0.99)),url(attendance\ image.jpg);
+    rgba(63, 81, 181, 0.99));
     background-blend-mode: multiply;
     backdrop-filter: blur(3px);
 
@@ -20,7 +20,7 @@ body{
     border:1px solid black;
     padding-bottom: 50px;
     /* look into these two */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+    box-shadow: 5px 4px 30px rgba(0, 0, 0, 0.25);
     border-radius: 12px;
 
 }
@@ -38,6 +38,7 @@ body{
     gap:15px;
     height: auto;          /* makes it shrink to fit its contents */
     padding-bottom: 20px;
+
     
 }
 
@@ -63,6 +64,13 @@ body{
     height:40px;
     margin-left: 30px;
     margin-right: 30px;
+    border-radius: 10px;
+}
+
+#c_pass{
+    height:40px;
+    margin-left: 30px;
+    margin-right:30px;
     border-radius: 10px;
 }
 
