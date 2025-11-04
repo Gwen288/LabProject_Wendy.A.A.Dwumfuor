@@ -1,15 +1,35 @@
 document.getElementById('myButton').addEventListener('click', Validate)
  
 function Validate(){
-    var password=document.getElementById("center1").value;
-    var c_password=document.getElementById("c_pass").value;
+    let password=document.getElementById("center1").value.trim(); ;
+    let c_password=document.getElementById("c_pass").value.trim();
+    let email=document.getElementById("center").value.trim();
+    let e_pattern= /^[A-Za-z][A-Za-z0-9._]*@ashesi\.edu\.gh$/;
+    let s_pass=/([A-Za-z])\w*(?=\d{1,})/;
 
-    if (password===c_password){
+    if(!e_pattern.test(email)){
+        Swal.fire({
+            title: "Invalid Email",
+            text:"check your email address",
+            icon:"error"
+        })
+        return;
+    }
+    if(!s_pass.test(password)|| c_password.length<6){
+        Swal.fire({
+            title: "Weak Password",
+            text:"Password must start with a letter, be at least 6 characters long and include at least one number.",
+            icon:"warning"
+        });
+        return;
+
+    }
+     if (password===c_password){
             Swal.fire({
               title: 'Password Matched!',
-              text: "Passsword confirmed",
+              text: "Password confirmed",
               icon: "success",
-              timer: 2000,
+              timer: 1000,
               timerProgressBar: true
           });
           
