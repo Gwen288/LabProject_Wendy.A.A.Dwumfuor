@@ -1,8 +1,8 @@
 document.getElementById('myButton').addEventListener('click', Validate)
  
 function Validate(){
-    var password=document.getElementById("center1").value.trim;
-    var c_password=document.getElementById("c_pass").value.trim;
+    var password=document.getElementById("center1").value;
+    var c_password=document.getElementById("c_pass").value;
 
     if (password===c_password){
             Swal.fire({
@@ -11,7 +11,6 @@ function Validate(){
               icon: "success",
               timer: 2000,
               timerProgressBar: true
-   
           });
           
     }else{
