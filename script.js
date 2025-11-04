@@ -1,21 +1,33 @@
 document.getElementById('myButton').addEventListener('click', Validate)
  
 function Validate(){
-    let password=document.getElementById("center1").value.trim(); ;
+    let name=document.getElementById("center2").value.trim(); 
+    let password=document.getElementById("center1").value.trim();
     let c_password=document.getElementById("c_pass").value.trim();
     let email=document.getElementById("center").value.trim();
     let e_pattern= /^[A-Za-z][A-Za-z0-9._]*@ashesi\.edu\.gh$/;
     let s_pass=/([A-Za-z])\w*(?=\d{1,})/;
 
+    if (!name || !email || !password || !c_password) {
+        Swal.fire({
+          title: "Missing Information",
+          text: "Please fill in all fields before proceeding.",
+          icon: "warning"
+        });
+        return;
+      }
+      
+    else{
+
     if(!e_pattern.test(email)){
         Swal.fire({
             title: "Invalid Email",
-            text:"check your email address",
+            text:"must be your instutional email address",
             icon:"error"
         })
         return;
     }
-    if(!s_pass.test(password)|| c_password.length<6){
+    if(!s_pass.test(password) || c_password.length<6){
         Swal.fire({
             title: "Weak Password",
             text:"Password must start with a letter, be at least 6 characters long and include at least one number.",
@@ -42,6 +54,8 @@ function Validate(){
             timerProgressBar: true
         });
     }
+}
+
 }
 
 
