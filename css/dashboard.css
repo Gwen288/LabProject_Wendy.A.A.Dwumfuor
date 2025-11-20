@@ -1,0 +1,69 @@
+body{
+  /*background: linear-gradient(to bottom,rgba(233, 30, 99, 0.99),
+  rgba(63, 81, 181, 0.99));*/
+  background-color: white;
+  margin:0;
+  padding:0;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: darkred;
+    display: flex;
+    justify-content: center;
+  }
+  
+  ul li a {
+    display: block;
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  ul li a:hover {
+    background-color: #111111;
+  }
+
+  table{
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5)
+  }
+
+  table,th, td {
+   border: 1px solid black;
+  
+  }
+  table,tr{
+    height:50px;
+  }
+
+  /*
+  .row{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+  }
+
+  .column{
+    display: flex;
+    flex-direction: column;
+  }
+*/
+  
+  #course,#attendance,#session{
+    width:90%;
+  }
+  .course,.attendance,.session{
+    display: flex;
+    justify-content: center;
+    
+  }
+  
+
+  #Delete{
+    background-color: red;
+  }
+  #Edit{
+    background-color: green;
+  }

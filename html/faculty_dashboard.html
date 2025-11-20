@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+        <title>MyDashboard</title>
+        <link rel="stylesheet" href="../css/dashboard.css">
+        
+    </head>
+    <body>
+        <div  class="nav">        
+            <ul >
+                <li><a href="#Course">Couse Management</a></li>
+                <li><a href="#Session">Sessions Overwiew</a></li>
+                <li><a href="#Attendance">Attendance Report</a></li>
+             <li><a href="#about">About</a></li>
+             </ul>
+
+        </div>
+
+          
+        <h2>Welcome Back FI</h2>
+
+
+        <section>
+            <div class="course">
+            <table id="course">
+                <caption>Course Overview</caption>
+                    <colgroup>
+                        <col span="4" style="background-color: white;">
+                    </colgroup>
+                <thead>
+                     <tr>
+
+                        <th>Course ID</th>
+                        <th>CourseName</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>    
+                <tbody>
+                    <tr>
+                        <td>CS101 </td>
+                        <td>Intro to Programming</td>
+                        <td><button id="Edit">Edit</button> <button  id="Delete">Delete</button></td>
+                
+                    </tr>
+                
+                    <tr>
+                        <td>CS102</td>
+                        <td> Data Structures</td>
+                        <td><button  id="Edit">Edit</button> <button  id="Delete">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>CS102</td>
+                        <td> Data Structures</td>
+                        <td><button  id="Edit">Edit</button> <button  id="Delete">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>MATH101</td>
+                        <td>Calculus I</td>
+                        <td><button  id="Edit">Edit</button> <button  id="Delete">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>MATH102</td>
+                        <td> Calculus II</td>
+                        <td><button  id="Edit">Edit</button> <button  id="Delete">Delete</button></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        </section>
+        <hr>
+        
+        <section id="Session">
+            <button>Create Session</button>
+
+                <div class="session">
+                    <table id="session">
+                            <colgroup>
+                                <col span="4" style="background-color: white;">
+                            </colgroup>
+                        <thead>
+                             <tr>
+    
+                                <th>Session ID</th>
+                                <th>Course</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>S101 </td>
+                                <td>CS101 </td>
+                                <td>14/11/25</td>
+                                <td><button>View</button><button>Edit</button> <button>Delete</button></td>
+                        
+                            </tr>
+                        
+                            <tr>
+                                <td>S102 </td>
+                                <td>CS102</td>
+                                <td> 10/11/25</td>
+                                <td><button>View</button><button>Edit</button> <button>Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td>S103 </td>
+                                <td>CS102</td>
+                                <td>6/11/25</td>
+                                <td><button>View</button><button>Edit</button> <button>Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td>S104 </td>
+                                <td>MATH101</td>
+                                <td>1/11/25</td>
+                                <td><button>View</button><button>Edit</button> <button>Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td>S105 </td>
+                                <td>MATH102</td>
+                                <td> 25/10/25</td>
+                                <td><button>View</button><button>Edit</button> <button>Delete</button></td>
+                            </tr>
+        
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+    
+                
+            </div>
+        </section>
+<hr>
+        <section id="Attendance">
+            <div class="attendance">
+            <table id="attendance">
+                <caption>Course Overview</caption>
+                    <colgroup>
+                        <col span="4" style="background-color: white;">
+                    </colgroup>
+                <thead>
+                     <tr>
+
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Course ID</th>
+                        <th>Attendance %</th>
+                    </tr>
+                </thead>    
+                <tbody>
+                    <tr>
+                        <td>1001</td>
+                        <td>Kofi Agyei</td>
+                        <td>CS101</td>
+                        <td>90%</td>
+                    </tr>
+                    <tr>
+                        <td>1002</td>
+                        <td>Serwah Sarpong</td>
+                        <td>CS101</td>
+                        <td>100%</td>
+                    </tr>
+                    <tr>
+                        <td>1003</td>
+                        <td>Dickson Black</td>
+                        <td>CS102</td>
+                        <td>80%</td>
+                    </tr>
+                    <tr>
+                        <td>1004</td>
+                        <td>Wendy Awuah</td>
+                        <td>CS102</td>
+                        <td>100%</td>
+                    </tr>
+                    <tr>
+                        <td>1005</td>
+                        <td>Abena Mensah</td>
+                        <td>MATH101</td>
+                        <td>95%</td>
+                    </tr>
+                    <tr>
+                        <td>1006</td>
+                        <td>Yaw Opoku</td>
+                        <td>MATH101</td>
+                        <td>85%</td>
+                    </tr>
+                    <tr>
+                        <td>1007</td>
+                        <td>Emmanuel Boateng</td>
+                        <td>PHY101</td>
+                        <td>70%</td>
+                    </tr>
+                    <tr>
+                        <td>1008</td>
+                        <td>Ashley Owusu</td>
+                        <td>PHY101</td>
+                        <td>95%</td>
+                    </tr>
+                    <tr>
+                        <td>1009</td>
+                        <td>Nana Akua</td>
+                        <td>ENG101</td>
+                        <td>88%</td>
+                    </tr>
+                    <tr>
+                        <td>1010</td>
+                        <td>Michael Asare</td>
+                        <td>ENG101</td>
+                        <td>90%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        </section>
+        
+
+   
+          
+    </body>
+</html> 

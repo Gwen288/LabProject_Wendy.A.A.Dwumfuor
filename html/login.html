@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lamg="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+        <title>LoginPage</title>
+        <link rel="stylesheet" href="../css/style.css" >
+
+    </head>
+    <body >
+        <div class="card">
+            <h2 id="layer">Login</h2>
+            <form id="l_form" class="myform" method="post" action="../php/login.php">
+                
+                <input type="email" name="email" placeholder="email" id="email">
+                <input type="password" name="password" placeholder="password"  id="password">
+
+                <div class="Check"> 
+                    <input type="checkbox" id="checkboxes" value="Remember me" >
+                    <label  for="email" id="check" >Remember me</label>
+                </div>
+            
+                <button type="submit" id="myButton" >Login</button> 
+            </form>
+
+            
+            <p id="paragraph">Don't have an account?<a href="SignUp.html">Signup</a></p>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="../js/script.js"></script>
+    </body>
+</html>

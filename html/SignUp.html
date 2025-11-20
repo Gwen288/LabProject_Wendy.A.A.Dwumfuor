@@ -4,17 +4,18 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" >
         <title>SignUpPage</title>
-        <link rel="stylesheet" href="style.css" >
+        <link rel="stylesheet" href="../css/style.css" >
 
     </head>
     <body>
         <div class="card">
             <h2 id="layer">SignUp</h2>
-            <form class="mainCard">
-                <input type="text" name="name" placeholder="name" id="center2">
-                <input type="email" name="email" placeholder="email" id="center">
-                <input type="password" name="password" placeholder="password"   id="center1">
-                <input type="password" name="password" placeholder="confirm password"   id="c_pass">
+            <form id="form" class="myform"  method="post" action="../php/SignUp.php">
+                <input type="text" name="first_name" placeholder="firstname" id="firstname">
+                <input type="text" name="last_name" placeholder="lastname" id="lastname">
+                <input type="email" name="email" placeholder="email" id="email">
+                <input type="password" name="password" placeholder="password"   id="password">
+                <input type="password" name="c_password" placeholder="confirm password"   id="c_pass">
 <!--
                 <div class="Check"> 
                     <input type="checkbox" id="email" value="Remember me" >
@@ -22,7 +23,7 @@
                 </div>
             -->
             
-                <button type="button" id="myButton">Signup</button>
+                <button type="submit" id="signupButton">Signup</button>
             </form>
             <!--
             <div id="message">
@@ -38,7 +39,7 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="script.js"></script>
+        <script src="../js/script.js"></script>
 
     </body>
 </html>
