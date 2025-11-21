@@ -1,5 +1,14 @@
 <?php
 
+echo "TEST PHP EXECUTION";
+exit;
+
+$env = parse_ini_file(__DIR__ .'/../env/connect.env');
+var_dump($env);
+exit;
+
+
+
 $firstname=$_POST["first_name"];
 $lastname=$_POST["last_name"];
 $email=$_POST["email"];
@@ -8,19 +17,16 @@ $h_password=password_hash($_POST["password"],PASSWORD_DEFAULT);
 echo "hi , writing php :)";
 
 //connecting to the database using a local server
-$servername="localhost";
-$username="root";
-$password="";
-$dbname="attendancemanagement";
-
-//creating a connection
-$conn=new mysqli($servername,$username,$password,$dbname);
-
-//checking if the connection was created succefully or not
-if($conn->connect_error){
-    die("Connection failed ");
-    
-}
+$conn = new mysqli(
+    $env['servername'],
+    $env['username'],
+    $env['password'],
+    $env['dbname']
+   );
+   // Check connection
+   if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+   }
 else{
     echo "Connection Successfully";
 }
