@@ -1,13 +1,11 @@
 <?php
 
-echo "TEST PHP EXECUTION";
-exit;
 
 $env = parse_ini_file(__DIR__ .'/../env/connect.env');
-var_dump($env);
+/*var_dump($env);
 exit;
 
-
+*/
 
 $firstname=$_POST["first_name"];
 $lastname=$_POST["last_name"];
