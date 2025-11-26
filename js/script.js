@@ -1,7 +1,5 @@
 // Signup validation
-document.getElementById("signupButton").addEventListener("click",Validate);
-
-    function Validate(event){
+    async function Validate(event){
 
         event.preventDefault();
 
@@ -29,11 +27,48 @@ document.getElementById("signupButton").addEventListener("click",Validate);
             return;
         }
 
-        if(password === c_password){
-            Swal.fire({ title: 'Password Matched!', text: "Account created", icon: "success", timer: 1000, timerProgressBar: true });
-            document.getElementById("form").submit();
-        } else {
+        if(password !== c_password){
             Swal.fire({ title: "Password Mismatch!", text:"Try again", icon: "error", timer:2000, timerProgressBar:true });
+            return;
+
+        } 
+
+        try {
+            // sends data to SignUp.php file 
+            let response = await fetch("../php/SignUp.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    f_name: f_name,
+                    l_name: l_name,
+                    email: email,
+                    password: password
+                })
+            });
+    
+            let result = await response.json();
+    
+            // handles success from server
+            if (result.status === "success") {
+                Swal.fire({
+                    title: "Success!",
+                    text: result.message,
+                    icon: "success",
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+    
+                // Redirect after 2 seconds
+                setTimeout(() => {
+                    window.location.href = "../html/login.html";
+                }, 2000);
+    
+            } else {
+                Swal.fire("Error", result.message, "error");
+            }
+    
+        } catch (error) {
+            Swal.fire("Error", "Server error occurred", "error");
         }
     }
  

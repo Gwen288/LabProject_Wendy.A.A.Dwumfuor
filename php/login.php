@@ -1,46 +1,70 @@
 <?php
+session_start(); 
+header("Content-Type: application/json");
 
-$env = parse_ini_file(__DIR__ . '/../env/connect.env');
+// receive json from login.js
+$data = json_decode(file_get_contents("php://input"), true);
 
-
-$email=$_POST["email"];
-$password=$_POST["password"];
-
-echo $email;
-
-$conn = new mysqli(
-    $env['servername'],
-    $env['username'],
-    $env['password'],
-    $env['dbname']
-   );
-   // Check connection
-   if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-   }
-   
-else{
-    echo ("Connection successful");
+// check if data exists
+if (!$data) {
+    echo json_encode(["success" => false, "message" => "No data received"]);
+    exit;
 }
 
+$email=trim($data["email"]??'');
+$password=trim($data["password"]??'');
+$remember = $data["remember"] ?? false;
 
-$stmt = $conn->prepare("SELECT password_hash FROM users WHERE email='$email'");
+//check if input fills are empty
+if (!$email || !$password) {
+    echo json_encode(["success" => false, "message" => "All fields are required"]);
+    exit;
+}
+
+//connecting to the database
+require("connection.php");
+if ($conn->connect_error) {
+    echo json_encode(["status" => "error", "message" => "DB Connection failed: " . $conn->connect_error]);
+    exit;
+}
+
+//selecting userid,firstname,lastname and password from database
+$stmt = $conn->prepare("SELECT user_id, first_name, last_name, password_hash FROM users WHERE email=?");
+$stmt->bind_param("s", $email);
 $stmt->execute();
-$stmt->store_result(); 
+$stmt->store_result();
 
+//checks if any user row was found
 if ($stmt->num_rows == 0) {
-    die("User does not exist. Try again.");
+    echo json_encode(["success" => false, "message" => "User does not exist. Try again."]);
+    exit;
 }
 
-// Bind the result to a variable
-$stmt->bind_result($hash);
-$stmt->fetch(); // fetch the row
+$stmt->bind_result($user_id, $first_name, $last_name, $hash);
+$stmt->fetch();
 
-// Verify password
 if (password_verify($password, $hash)) {
-    header("location:/LabProject_Wendy.A.A.Dwumfuor/LabProject_Wendy.A.A.Dwumfuor/html/faculty_dashboard.html");
-    
+    // store user id and username session variables
+    $_SESSION['user_id'] = $user_id;
+    $_SESSION['username'] = $first_name . " " . $last_name;
+
+    if ($remember) {
+        // set cookie for 30 days
+        setcookie("user_email", $email, time() + (86400 * 30), "/");
+    } else {
+        // delete cookie if it exists by setting the expiry date one hour back
+        setcookie("user_email", "", time() - 3600, "/");
+    }
+
+    echo json_encode([
+        "success" => true,
+        "username" => $_SESSION['username'],
+        "user_id" => $_SESSION['user_id']
+    ]);
 } else {
-    die("Incorrect password. Try again.");
+    echo json_encode(["success" => false, "message" => "Incorrect password. Try again."]);
 }
+
+$stmt->close();
+$conn->close();
 ?>

@@ -1,0 +1,5 @@
+[23-Nov-2025 15:35:26 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'id' in 'field list' in C:\xampp\htdocs\labProject_Wendy.A.A.Dwumfuor\LabProject_Wendy.A.A.Dwumfuor\php\login.php:35
+Stack trace:
+#0 C:\xampp\htdocs\labProject_Wendy.A.A.Dwumfuor\LabProject_Wendy.A.A.Dwumfuor\php\login.php(35): mysqli->prepare('SELECT id, firs...')
+#1 {main}
+  thrown in C:\xampp\htdocs\labProject_Wendy.A.A.Dwumfuor\LabProject_Wendy.A.A.Dwumfuor\php\login.php on line 35

@@ -21,6 +21,18 @@ ul {
     padding: 14px 16px;
     text-decoration: none;
   }
+
+  ul li button {
+    display: inline-block;
+    color: black;
+    padding: 10px 4px;
+    border-radius: 10%;
+    
+  }
+
+  ul li button:hover {
+    background-color: #555;
+}
   
   ul li a:hover {
     background-color: #111111;

@@ -10,7 +10,7 @@
     <body>
         <div class="card">
             <h2 id="layer">SignUp</h2>
-            <form id="form" class="myform"  method="post" action="../php/SignUp.php">
+            <form id="form" class="myform">
                 <input type="text" name="first_name" placeholder="firstname" id="firstname">
                 <input type="text" name="last_name" placeholder="lastname" id="lastname">
                 <input type="email" name="email" placeholder="email" id="email">
@@ -23,7 +23,7 @@
                 </div>
             -->
             
-                <button type="submit" id="signupButton">Signup</button>
+                <button type="submit" onclick="Validate(event)">Signup</button>
             </form>
             <!--
             <div id="message">

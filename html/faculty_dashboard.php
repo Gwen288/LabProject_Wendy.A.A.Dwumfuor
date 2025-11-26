@@ -1,3 +1,5 @@
+<?php require "../php/auth_check.php"; ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,15 +16,17 @@
                 <li><a href="#Session">Sessions Overwiew</a></li>
                 <li><a href="#Attendance">Attendance Report</a></li>
              <li><a href="#about">About</a></li>
+             <li><button type="button" id="logoutButton">Logout</button></li>
              </ul>
 
         </div>
 
           
-        <h2>Welcome Back FI</h2>
+        <h2>Welcome Back Faculty</h2>
 
 
         <section>
+            <button type=button >Create new course</button>
             <div class="course">
             <table id="course">
                 <caption>Course Overview</caption>
@@ -219,8 +223,7 @@
 
         </section>
         
-
-   
-          
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="../js/logout.js"></script> 
     </body>
 </html> 
