@@ -1,81 +1,255 @@
-body{
-  /*background: linear-gradient(to bottom,rgba(233, 30, 99, 0.99),
-  rgba(63, 81, 181, 0.99));*/
-  background-color: white;
-  margin:0;
-  padding:0;
+/* ===========================================
+   GLOBAL PAGE STYLE
+=========================================== */
+body {
+  margin: 0;
+  padding: 0;
+  background: #f0f2f5;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  color: #1a1a1a;
 }
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    background-color: darkred;
-    display: flex;
-    justify-content: center;
-  }
-  
-  ul li a {
-    display: block;
-    color: white;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-
-  ul li button {
-    display: inline-block;
-    color: black;
-    padding: 10px 4px;
-    border-radius: 10%;
-    
-  }
-
-  ul li button:hover {
-    background-color: #555;
+html {
+  scroll-behavior: smooth;
 }
-  
-  ul li a:hover {
-    background-color: #111111;
-  }
 
-  table{
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5)
-  }
+/* ===========================================
+ PREMIUM NAVIGATION BAR
+=========================================== */
+.navbar {
+  background: #8b0000;
+  padding: 12px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
 
-  table,th, td {
-   border: 1px solid black;
-  
-  }
-  table,tr{
-    height:50px;
-  }
+.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
 
-  /*
-  .row{
-    display: flex;
-    flex-direction: row;
-    justify-content:space-around;
-  }
+.navbar li a {
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: 0.25s ease-in-out;
+}
 
-  .column{
-    display: flex;
-    flex-direction: column;
-  }
-*/
-  
-  #course,#attendance,#session{
-    width:90%;
-  }
-  .course,.attendance,.session{
-    display: flex;
-    justify-content: center;
-    
-  }
-  
+.navbar li a:hover {
+  background: #5a0000;
+  transform: translateY(-2px);
+}
 
-  #Delete{
-    background-color: red;
-  }
-  #Edit{
-    background-color: green;
-  }
+.logout-btn {
+  background: white;
+  border: none;
+  padding: 10px 16px;
+  margin-left: 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #8b0000;
+  transition: 0.2s;
+}
+
+.logout-btn:hover {
+  background: #ffe1e1;
+}
+
+/* ===========================================
+ HEADERS
+=========================================== */
+.welcome {
+  text-align: center;
+  margin: 30px 0;
+  font-size: 32px;
+  font-weight: 700;
+  color: #222;
+}
+
+/* ===========================================
+ SECTION WRAPPER
+=========================================== */
+.section {
+  width: 92%;
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 25px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.section h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===========================================
+ BUTTONS (Global Premium Style)
+=========================================== */
+.primary-btn {
+  background: #0066ff;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s ease-in-out;
+}
+
+.primary-btn:hover {
+  background: #004ec2;
+  transform: translateY(-2px);
+}
+
+/* Table action buttons */
+.edit-btn, .delete-btn, .view-btn, .approve-btn, .reject-btn {
+  padding: 7px 12px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  margin-right: 5px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.edit-btn { background: #27ae60; }
+.edit-btn:hover { background: #1e8449; }
+
+.delete-btn { background: #e74c3c; }
+.delete-btn:hover { background: #c0392b; }
+
+.view-btn { background: #3498db; }
+.view-btn:hover { background: #216ba5; }
+
+.approve-btn { background: #28a745; }
+.approve-btn:hover { background: #1e7e34; }
+
+.reject-btn { background: #dc3545; }
+.reject-btn:hover { background: #b21f2d; }
+
+/* ===========================================
+ MODALS (Cleaner Style)
+=========================================== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background: white;
+  margin: 10% auto;
+  padding: 25px;
+  width: 400px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.modal-content h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.close-modal {
+  padding: 10px 16px;
+  border: none;
+  background: #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.close-modal:hover {
+  background: #bbb;
+}
+
+/* ===========================================
+ PREMIUM TABLE STYLE
+=========================================== */
+.table-container {
+  overflow-x: auto;
+  margin-top: 15px;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+}
+
+.styled-table thead tr {
+  background: #8b0000;
+  color: white;
+}
+
+.styled-table th {
+  padding: 14px;
+  font-size: 15px;
+}
+
+.styled-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #ececec;
+  font-size: 14px;
+}
+
+.styled-table tbody tr:hover {
+  background: #f7f7f7;
+  transition: 0.2s;
+}
+
+/* Improve spacing between sections */
+hr {
+  border: none;
+  margin: 40px 0;
+}
+
+
+.swal2-container {
+  z-index: 10000 !important;
+}
+
+.styled-table td:last-child {
+  display: flex;
+  gap: 5px; /* spacing between buttons */
+  justify-content: flex-start; /* optional */
+}
+
