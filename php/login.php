@@ -29,7 +29,7 @@ if ($conn->connect_error) {
 }
 
 //selecting userid,firstname,lastname and password from database
-$stmt = $conn->prepare("SELECT user_id, first_name, last_name, password_hash FROM users WHERE email=?");
+$stmt = $conn->prepare("SELECT user_id, first_name, last_name, password_hash , `role` FROM users WHERE email=?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $stmt->store_result();
@@ -40,13 +40,28 @@ if ($stmt->num_rows == 0) {
     exit;
 }
 
-$stmt->bind_result($user_id, $first_name, $last_name, $hash);
+$stmt->bind_result($user_id, $first_name, $last_name, $hash,$role);
 $stmt->fetch();
 
 if (password_verify($password, $hash)) {
     // store user id and username session variables
     $_SESSION['user_id'] = $user_id;
     $_SESSION['username'] = $first_name . " " . $last_name;
+    $_SESSION['u_role']=$role;
+
+
+    $redirect='';
+    if($_SESSION['u_role']==='student'){
+        $redirect='../html/student_dashboard';
+
+    }
+    else if($_SESSION['u_role']==='faculty'){
+        $redirect='../html/faculty_dashboard';
+
+    }else{
+        $redirect='../html/facultyIntern_dashboard';
+    }
+
 
     if ($remember) {
         // set cookie for 30 days
@@ -59,7 +74,8 @@ if (password_verify($password, $hash)) {
     echo json_encode([
         "success" => true,
         "username" => $_SESSION['username'],
-        "user_id" => $_SESSION['user_id']
+        "user_id" => $_SESSION['user_id'],
+        "redirect" => $redirect
     ]);
 } else {
     echo json_encode(["success" => false, "message" => "Incorrect password. Try again."]);

@@ -1,3 +1,9 @@
+<?php 
+require "../php/auth_check.php";
+
+checkAccess('facultyIntern');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

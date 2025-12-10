@@ -1,4 +1,8 @@
-<?php require "../php/auth_check.php"; ?>
+<?php 
+require "../php/auth_check.php";
+
+checkAccess('faculty');
+?>
 
 <!DOCTYPE html>
 <html lang="en">

@@ -35,8 +35,7 @@ document.getElementById("myButton").addEventListener("click", async function(eve
             });
 
             setTimeout(() => {
-               // window.location.href = "login.js";
-               window.location.href = "../html/faculty_dashboard.php"; 
+               window.location.href = result.redirect; 
             }, 1500);
         } else {
             Swal.fire({ title: "Login Failed", text: "Invalid credentials", icon: "error" });
