@@ -11,11 +11,11 @@ $reason = $data['request_reason'] ?? '';
 $status = 'pending';
 $requestDate = date('Y-m-d');
 
-// Get student ID directly from session
-$studentId = $_SESSION['user_id'] ?? null;
+// Accept student_id from JS OR session
+$studentId = $data['student_id'] ?? ($_SESSION['user_id'] ?? null);
 
 if (!$courseId || !$studentId) {
-    echo json_encode(['status'=>'error','msg'=>'Missing data']);
+    echo json_encode(['status'=>'error','msg'=>'Missing data: courseId or studentId']);
     exit;
 }
 
@@ -32,4 +32,5 @@ if($stmt->execute()){
 
 $stmt->close();
 $conn->close();
+
 ?>

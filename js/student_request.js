@@ -12,11 +12,9 @@ closeJoinModalBtn.addEventListener('click', () => joinCourseModal.style.display 
 saveJoinBtn.addEventListener('click', async () => {
     const course_code = joinCourseModal.querySelector('input[name="course_code"]').value.trim();
     const role = joinCourseModal.querySelector('select[name="join_type"]').value;
-    const reason = joinCourseModal.querySelector('textarea[name="request_reason"]') 
-                   ? joinCourseModal.querySelector('textarea[name="request_reason"]').value.trim() 
-                   : '';
+    const reason = joinCourseModal.querySelector('textarea[name="request_reason"]').value.trim();
 
-    if (!course_code || !role || !reason) {
+    if (!course_code || !role) {
         return Swal.fire({ title: 'Error', text: 'Please fill in all fields', icon: 'error' });
     }
 
@@ -31,22 +29,31 @@ saveJoinBtn.addEventListener('click', async () => {
 
         const course_id = courseData.course_id;
 
-        // Assume you have a way to get current student_id from session
-        const student_id = window.currentStudentId; 
+        // Make sure student ID exists
+        const student_id = window.currentStudentId;
+        if (!student_id) {
+            return Swal.fire({ title: 'Error', text: 'Student session missing', icon: 'error' });
+        }
 
-        // Send join request to backend
+        // Send join request to backend, including student_id
         const response = await fetch('../php/student_request_course.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ course_id, role, request_reason: reason })
+            body: JSON.stringify({
+                course_id,
+                role,
+                request_reason: reason,
+                student_id: student_id
+            })
         });
 
         const result = await response.json();
+        console.log("Join Request Response:", result);
 
         if (result.status === 'success') {
             Swal.fire({ title: 'Request Sent!', icon: 'success' }).then(() => {
                 joinCourseModal.style.display = 'none';
-                loadStudentCourses(); 
+                loadStudentCourses();
             });
         } else {
             Swal.fire({ title: 'Error', text: result.msg || 'Failed to send request', icon: 'error' });
@@ -61,7 +68,6 @@ saveJoinBtn.addEventListener('click', async () => {
 // ----------------- LOAD STUDENT COURSES -----------------
 async function loadStudentCourses() {
     try {
-    
         const response = await fetch(`../php/get_student_courses.php?student_id=${window.currentStudentId}`);
         const courses = await response.json();
 
@@ -82,7 +88,7 @@ async function loadStudentCourses() {
             `;
         });
 
-        attachCourseRowEvents(); 
+        attachCourseRowEvents();
 
     } catch (err) {
         console.error(err);
