@@ -27,7 +27,7 @@ checkAccess('faculty_intern');
     </div>
 </nav>
 
-<h2 class="welcome">Welcome Back, $_SESSION[username] </h2>
+<h2 class="welcome">Welcome Back, <?= $_SESSION['username'] ?> </h2>
 
 <!-- ========================= COURSE LIST ============================== -->
 <section id="CourseList" class="section">
