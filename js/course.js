@@ -4,11 +4,11 @@ const closeCourseBtn = courseModal.querySelector('.close-modal');
 const saveCourseBtn = courseModal.querySelector('#saveCourseBtn');
 const courseTableBody = document.getElementById('courseTableBody');
 
-// ----------------- OPEN & CLOSE MODAL -----------------
+// OPEN & CLOSE MODAL 
 openCourseBtn.addEventListener('click', () => courseModal.style.display = 'block');
 closeCourseBtn.addEventListener('click', () => courseModal.style.display = 'none');
 
-// ----------------- LOAD COURSES -----------------
+// LOAD COURSES 
 async function loadCourses() {
     const response = await fetch('../php/get_courses.php');
     const courses = await response.json();
@@ -34,7 +34,7 @@ async function loadCourses() {
     attachEditDeleteEvents();
 }
 
-// ----------------- ADD NEW COURSE -----------------
+// ADD NEW COURSE 
 saveCourseBtn.addEventListener('click', async () => {
     const course_code = courseModal.querySelector('input[name="course_code"]').value.trim();
     const course_name = courseModal.querySelector('input[name="course_name"]').value.trim();
@@ -57,14 +57,14 @@ saveCourseBtn.addEventListener('click', async () => {
     if(result.status === 'success'){
         Swal.fire({ title: 'Added!', icon: 'success' }).then(() => {
             courseModal.style.display = 'none';
-            loadCourses(); // refresh table
+            loadCourses(); 
         });
     } else {
         Swal.fire({ title: 'Error', text: result.msg || 'Failed to add course', icon: 'error' });
     }
 });
 
-// ----------------- ATTACH EDIT & DELETE EVENTS -----------------
+// ATTACH EDIT & DELETE EVENTS 
 function attachEditDeleteEvents() {
     document.querySelectorAll('#courseTableBody .edit-btn').forEach(btn => {
         btn.addEventListener('click', async e => {
@@ -142,5 +142,5 @@ function attachEditDeleteEvents() {
     });
 }
 
-// ----------------- INITIAL LOAD -----------------
+// INITIAL LOAD 
 loadCourses();

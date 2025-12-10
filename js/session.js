@@ -4,11 +4,11 @@ const closeSessionBtn = sessionModal.querySelector('.close-modal');
 const saveSessionBtn = sessionModal.querySelector('.primary-btn');
 const sessionTableBody = document.getElementById('sessionTableBody');
 
-// ----------------- OPEN & CLOSE MODAL -----------------
+// OPEN & CLOSE MODAL 
 openSessionBtn.addEventListener('click', () => sessionModal.style.display = 'block');
 closeSessionBtn.addEventListener('click', () => sessionModal.style.display = 'none');
 
-// ----------------- LOAD SESSIONS -----------------
+// LOAD SESSIONS 
 async function loadSessions() {
     const response = await fetch('../php/get_sessions.php');
     const sessions = await response.json();
@@ -36,7 +36,7 @@ async function loadSessions() {
     attachRowEvents();
 }
 
-// ----------------- SAVE NEW SESSION -----------------
+//  SAVE NEW SESSION 
 saveSessionBtn.addEventListener('click', async () => {
     const course_code = sessionModal.querySelector('input[name="course_code"]').value.trim();
     const topic = sessionModal.querySelector('input[name="topic"]').value.trim();
@@ -71,14 +71,15 @@ saveSessionBtn.addEventListener('click', async () => {
     if (result.status === 'success') {
         Swal.fire({ title: 'Added!', icon: 'success' }).then(() => {
             sessionModal.style.display = 'none';
-            loadSessions(); // Refresh table dynamically
+         // Refresh table dynamically
+            loadSessions(); 
         });
     } else {
         Swal.fire({ title: 'Error', text: result.msg || 'Failed to add session', icon: 'error' });
     }
 });
 
-// ----------------- ATTACH VIEW, EDIT & DELETE EVENTS -----------------
+// ATTACH VIEW, EDIT & DELETE EVENTS 
 function attachRowEvents() {
     document.querySelectorAll('#sessionTableBody .view-btn').forEach(btn => {
         btn.addEventListener('click', async e => {
@@ -191,5 +192,5 @@ function attachRowEvents() {
     });
 }
 
-// ----------------- INITIAL LOAD -----------------
+// INITIAL LOAD 
 loadSessions();
