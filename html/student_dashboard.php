@@ -160,22 +160,6 @@ checkAccess('student');
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../js/logout.js"></script>
-<script>
-    // Open and close modals
-    document.getElementById("joinCourseBtn").addEventListener("click", () => {
-        document.getElementById("joinCourseModal").style.display = "block";
-    });
-
-    document.querySelectorAll(".close-modal").forEach(btn => {
-        btn.addEventListener("click", () => {
-            btn.closest(".modal").style.display = "none";
-        });
-    });
-
-    document.getElementById("saveJoinBtn").addEventListener("click", () => {
-        Swal.fire('Success!', 'Your join request has been submitted.', 'success');
-        document.getElementById("joinCourseModal").style.display = "none";
-    });
-</script>
+<script src="../js/student_request.js"></script>
 </body>
 </html>

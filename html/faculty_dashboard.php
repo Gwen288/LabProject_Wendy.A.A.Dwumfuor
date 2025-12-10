@@ -230,5 +230,6 @@ checkAccess('faculty');
 <script src="../js/logout.js"></script>
 <script src="../js/course.js"></script>
 <script src="../js/session.js"></script>
+<script src="../js/faculty_join_requests.js"></script>
 </body>
 </html>
