@@ -25,7 +25,7 @@ saveJoinBtn.addEventListener('click', async () => {
         const courseRes = await fetch(`../php/get_course_id.php?course_code=${encodeURIComponent(course_code)}`);
         const courseData = await courseRes.json();
 
-        if (!courseData.status || !courseData.course_id) {
+        if (courseData.status !== 'success' || !courseData.course_id) {
             return Swal.fire({ title: 'Error', text: 'Invalid course code', icon: 'error' });
         }
 
@@ -45,10 +45,11 @@ saveJoinBtn.addEventListener('click', async () => {
         });
 
         const result = await response.json();
+
         if (result.status === 'success') {
             Swal.fire({ title: 'Request Sent!', icon: 'success', timer: 1500, showConfirmButton: false });
             joinCourseModal.style.display = 'none';
-            loadStudentCourses(); // refresh table
+            await loadStudentCourses(); // refresh table after request
         } else {
             Swal.fire({ title: 'Error', text: result.msg || 'Failed to send request', icon: 'error' });
         }
@@ -63,29 +64,40 @@ saveJoinBtn.addEventListener('click', async () => {
 async function loadStudentCourses() {
     try {
         const response = await fetch(`../php/get_student_courses.php?student_id=${window.currentStudentId}`);
-        const courses = await response.json();
+        const data = await response.json();
 
         myCoursesTable.innerHTML = '';
 
-        courses.forEach(course => {
-            myCoursesTable.innerHTML += `
-                <tr>
-                    <td>${course.course_code}</td>
-                    <td>${course.course_name}</td>
-                    <td>${course.instructor_name}</td>
-                    <td>${course.status.charAt(0).toUpperCase() + course.status.slice(1)}</td>
-                    <td>
-                        <button class="view-btn">View</button>
-                        <button class="edit-btn">${course.role.charAt(0).toUpperCase() + course.role.slice(1)}</button>
-                    </td>
-                </tr>
+        if (data.status !== 'success') {
+            myCoursesTable.innerHTML = `<tr><td colspan="5">Error loading courses: ${data.msg || 'Unknown error'}</td></tr>`;
+            return;
+        }
+
+        if (data.courses.length === 0) {
+            myCoursesTable.innerHTML = `<tr><td colspan="5">No courses found.</td></tr>`;
+            return;
+        }
+
+        data.courses.forEach(course => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${course.course_code}</td>
+                <td>${course.course_name}</td>
+                <td>${course.instructor_name}</td>
+                <td>${course.status.charAt(0).toUpperCase() + course.status.slice(1)}</td>
+                <td>
+                    <button class="view-btn">View</button>
+                    <button class="edit-btn">${course.role.charAt(0).toUpperCase() + course.role.slice(1)}</button>
+                </td>
             `;
+            myCoursesTable.appendChild(tr);
         });
 
-        attachCourseRowEvents(); // attach buttons
+        attachCourseRowEvents();
 
     } catch (err) {
         console.error(err);
+        myCoursesTable.innerHTML = `<tr><td colspan="5">Failed to load courses.</td></tr>`;
     }
 }
 
