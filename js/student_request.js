@@ -25,7 +25,7 @@ saveJoinBtn.addEventListener('click', async () => {
         const courseRes = await fetch(`../php/get_course_id.php?course_code=${encodeURIComponent(course_code)}`);
         const courseData = await courseRes.json();
 
-        if (courseData.status !== 'success' || !courseData.course_id) {
+        if (!courseData.status || !courseData.course_id) {
             return Swal.fire({ title: 'Error', text: 'Invalid course code', icon: 'error' });
         }
 
