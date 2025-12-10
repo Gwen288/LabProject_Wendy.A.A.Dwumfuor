@@ -107,9 +107,8 @@ checkAccess('faculty');
                 </tr>
             </thead>
 
-            <tbody id="sessionsTable">
-                <tr >
-                   
+            <tbody id="sessionTableBody">
+         
             </tbody>
         </table>
     </div>
