@@ -6,7 +6,16 @@ async function loadJoinRequests() {
         const data = await res.json();
 
         requestsTable.innerHTML = '';
-        if (data.status !== 'success') return;
+
+        if (data.status !== 'success') {
+            requestsTable.innerHTML = `<tr><td colspan="4">Failed to load requests: ${data.msg || 'Unknown error'}</td></tr>`;
+            return;
+        }
+
+        if (data.requests.length === 0) {
+            requestsTable.innerHTML = `<tr><td colspan="4">No pending requests.</td></tr>`;
+            return;
+        }
 
         data.requests.forEach(req => {
             const tr = document.createElement('tr');
@@ -34,6 +43,7 @@ async function loadJoinRequests() {
         });
     } catch (err) {
         console.error('Failed to load join requests:', err);
+        requestsTable.innerHTML = `<tr><td colspan="4">Failed to load requests.</td></tr>`;
     }
 }
 
@@ -44,6 +54,7 @@ async function updateRequest(student_id, course_id, status) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ student_id, course_id, status })
         });
+
         const result = await res.json();
 
         if (result.status === 'success') {
