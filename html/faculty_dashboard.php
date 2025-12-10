@@ -180,24 +180,24 @@ checkAccess('faculty');
     </select>
 
     <div class="table-container">
-        <table class="styled-table">
-            <thead>
-                <tr>
-                    <th>Student ID</th>
-                    <th>Name</th>
-                    <th>Course</th>
-                    <th>Attendance %</th>
-                </tr>
-            </thead>
+    <div id="attendanceTableContainer">
+    <table class="styled-table" id="attendanceTable">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Remarks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td colspan="4">Select a session to view students</td></tr>
+        </tbody>
+    </table>
+</div>
 
-            <tbody>
-                <tr><td>1001</td><td>Kofi Agyei</td><td>CS101</td><td>90%</td></tr>
-                <tr><td>1002</td><td>Serwah Sarpong</td><td>CS101</td><td>100%</td></tr>
-                <tr><td>1003</td><td>Dickson Black</td><td>CS102</td><td>80%</td></tr>
-                <tr><td>1004</td><td>Wendy Awuah</td><td>CS102</td><td>100%</td></tr>
-            </tbody>
-        </table>
-    </div>
+<button class="primary-btn" id="saveAttendanceBtn">Save Attendance</button>
+
 </section>
 
 <hr>
