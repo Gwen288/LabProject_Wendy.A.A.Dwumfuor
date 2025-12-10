@@ -30,7 +30,7 @@ checkAccess('faculty');
     </div>
 </nav>
 
-<h2 class="welcome">Welcome Back, Faculty</h2>
+<h2 class="welcome">Welcome Back, <?= $_SESSION['username'] ?> </h2>
 
 <!-- ========================= COURSE MANAGEMENT ============================== -->
 <section id="Course" class="section">

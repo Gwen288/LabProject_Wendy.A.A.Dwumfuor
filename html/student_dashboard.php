@@ -28,7 +28,7 @@ checkAccess('student');
     </div>
 </nav>
 
-<h2 class="welcome">Welcome Back, Student</h2>
+<h2 class="welcome">Welcome Back, <?= $_SESSION['username'] ?> </h2>
 
 <!-- ========================= MY COURSES ============================== -->
 <section id="MyCourses" class="section">
