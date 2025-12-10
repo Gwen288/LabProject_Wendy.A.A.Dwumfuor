@@ -1,7 +1,7 @@
 <?php 
 require "../php/auth_check.php";
 
-checkAccess('facultyIntern');
+checkAccess('faculty_Intern');
 ?>
 
 <!DOCTYPE html>
