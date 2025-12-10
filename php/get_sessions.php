@@ -22,10 +22,7 @@ try {
         $sessions[] = $row;
     }
 
-    echo json_encode([
-        'status' => 'success',
-        'sessions' => $sessions
-    ]);
+    echo json_encode($sessions);
 
 } catch (Exception $e) {
     echo json_encode([

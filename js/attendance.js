@@ -3,7 +3,7 @@ const attendanceSessionSelect = document.getElementById('attendanceSessionSelect
 // Load sessions for this faculty
 async function loadFacultySessions() {
     try {
-        const res = await fetch('../php/get_sessions.php');
+        const res = await fetch('../php/faculty_sessions.php');
         const data = await res.json();
         if (data.status !== 'success') return;
 
