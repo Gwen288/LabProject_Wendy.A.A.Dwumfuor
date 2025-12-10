@@ -162,19 +162,7 @@ checkAccess('faculty');
             </thead>
 
             <tbody>
-                <tr>
-                    <td>Kofi Mensah</td>
-                    <td>CS102</td>
-                    <td>Interested in Data Structures</td>
-                    <td><button class="approve-btn">Approve</button><button class="reject-btn">Reject</button></td>
-                </tr>
 
-                <tr>
-                    <td>Abena Owusu</td>
-                    <td>MATH101</td>
-                    <td>Major Requirement</td>
-                    <td><button class="approve-btn">Approve</button><button class="reject-btn">Reject</button></td>
-                </tr>
             </tbody>
         </table>
     </div>

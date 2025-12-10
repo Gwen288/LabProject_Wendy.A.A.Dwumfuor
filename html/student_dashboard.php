@@ -55,16 +55,7 @@ checkAccess('student');
             </thead>
             <tbody id="myCoursesTable">
                 <!-- dynamically loaded student courses -->
-                <tr>
-                    <td>CS101</td>
-                    <td>Introduction to Programming</td>
-                    <td>Dr. Kofi Mensah</td>
-                    <td>Enrolled</td>
-                    <td>
-                        <button class="view-btn">View</button>
-                        <button class="edit-btn">Auditor</button>
-                    </td>
-                </tr>
+                
             </tbody>
         </table>
     </div>
