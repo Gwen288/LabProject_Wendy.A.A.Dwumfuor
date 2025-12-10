@@ -1,4 +1,5 @@
-<?php 
+<?php
+session_start();
 require "../php/auth_check.php";
 
 checkAccess('faculty_intern');
@@ -26,7 +27,7 @@ checkAccess('faculty_intern');
     </div>
 </nav>
 
-<h2 class="welcome">Welcome Back, Faculty Intern</h2>
+<h2 class="welcome">Welcome Back, $_SESSION[username] </h2>
 
 <!-- ========================= COURSE LIST ============================== -->
 <section id="CourseList" class="section">
