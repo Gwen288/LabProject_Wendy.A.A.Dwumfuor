@@ -178,7 +178,7 @@ checkAccess('faculty');
     <select id="attendanceSessionSelect">
         <option value="">-- Select Session --</option>
     </select>
-    
+
     <div class="table-container">
         <table class="styled-table">
             <thead>
@@ -236,5 +236,6 @@ checkAccess('faculty');
 <script src="../js/course.js"></script>
 <script src="../js/session.js"></script>
 <script src="../js/faculty_join_requests.js"></script>
+<script src="../js/attendance.js"></script>
 </body>
 </html>
