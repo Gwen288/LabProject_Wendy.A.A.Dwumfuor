@@ -174,6 +174,11 @@ checkAccess('faculty');
 <section id="Attendance" class="section">
     <h3>Attendance Overview</h3>
 
+    <label for="attendanceSessionSelect">Select Session:</label>
+    <select id="attendanceSessionSelect">
+        <option value="">-- Select Session --</option>
+    </select>
+    
     <div class="table-container">
         <table class="styled-table">
             <thead>
