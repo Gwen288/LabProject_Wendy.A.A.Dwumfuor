@@ -25,6 +25,10 @@ $stmt = $conn->prepare("INSERT INTO course_student_list
 $stmt->bind_param("iissss", $courseId, $studentId, $status, $role, $reason, $requestDate);
 
 if($stmt->execute()){
+    $stmt->execute();
+error_log("INSERT ERROR: " . $stmt->error);
+error_log("AFFECTED ROWS: " . $stmt->affected_rows);
+
     echo json_encode(['status'=>'success']);
 }else{
     echo json_encode(['status'=>'error','msg'=>$stmt->error]);
