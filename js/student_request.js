@@ -1,14 +1,16 @@
-// OPEN & CLOSE MODAL 
+// ----------------- ELEMENTS -----------------
 const joinCourseModal = document.getElementById('joinCourseModal');
 const joinCourseBtn = document.getElementById('joinCourseBtn');
 const saveJoinBtn = document.getElementById('saveJoinBtn');
-const closeJoinModalBtn = joinCourseModal.querySelector('.close-modal');
 const myCoursesTable = document.getElementById('myCoursesTable');
 
+// ----------------- OPEN & CLOSE MODAL -----------------
 joinCourseBtn.addEventListener('click', () => joinCourseModal.style.display = 'block');
-closeJoinModalBtn.addEventListener('click', () => joinCourseModal.style.display = 'none');
+document.querySelectorAll('.close-modal').forEach(btn => {
+    btn.addEventListener('click', () => joinCourseModal.style.display = 'none');
+});
 
-// SAVE JOIN REQUEST 
+// ----------------- SAVE JOIN REQUEST -----------------
 saveJoinBtn.addEventListener('click', async () => {
     const course_code = joinCourseModal.querySelector('input[name="course_code"]').value.trim();
     const role = joinCourseModal.querySelector('select[name="join_type"]').value;
@@ -29,32 +31,24 @@ saveJoinBtn.addEventListener('click', async () => {
 
         const course_id = courseData.course_id;
 
-        // Make sure student ID exists
+        // Ensure student ID exists
         const student_id = window.currentStudentId;
         if (!student_id) {
             return Swal.fire({ title: 'Error', text: 'Student session missing', icon: 'error' });
         }
 
-        // Send join request to backend, including student_id
+        // Send join request to backend
         const response = await fetch('../php/student_request_course.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                course_id,
-                role,
-                request_reason: reason,
-                student_id: student_id
-            })
+            body: JSON.stringify({ course_id, role, request_reason: reason, student_id })
         });
 
         const result = await response.json();
-        console.log("Join Request Response:", result);
-
         if (result.status === 'success') {
-            Swal.fire({ title: 'Request Sent!', icon: 'success' }).then(() => {
-                joinCourseModal.style.display = 'none';
-                loadStudentCourses();
-            });
+            Swal.fire({ title: 'Request Sent!', icon: 'success', timer: 1500, showConfirmButton: false });
+            joinCourseModal.style.display = 'none';
+            loadStudentCourses(); // refresh table
         } else {
             Swal.fire({ title: 'Error', text: result.msg || 'Failed to send request', icon: 'error' });
         }
@@ -88,12 +82,29 @@ async function loadStudentCourses() {
             `;
         });
 
-        attachCourseRowEvents();
+        attachCourseRowEvents(); // attach buttons
 
     } catch (err) {
         console.error(err);
     }
 }
 
-// Initial load
+// ----------------- ATTACH BUTTON EVENTS -----------------
+function attachCourseRowEvents() {
+    document.querySelectorAll('#myCoursesTable .view-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+            const tr = e.target.closest('tr');
+            Swal.fire('Course Info', `Viewing course: ${tr.children[1].textContent}`, 'info');
+        });
+    });
+
+    document.querySelectorAll('#myCoursesTable .edit-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+            const tr = e.target.closest('tr');
+            Swal.fire('Role Info', `Your role: ${tr.children[4].querySelector('.edit-btn').textContent}`, 'info');
+        });
+    });
+}
+
+// ----------------- INITIAL LOAD -----------------
 loadStudentCourses();

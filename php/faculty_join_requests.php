@@ -14,16 +14,20 @@ $sql = "
 ";
 
 $result = $conn->query($sql);
+
 if (!$result) {
     echo json_encode(['status' => 'error', 'msg' => $conn->error]);
+    $conn->close();
     exit;
 }
 
 $requests = [];
+
 while ($row = $result->fetch_assoc()) {
     $requests[] = $row;
 }
 
 echo json_encode(['status' => 'success', 'requests' => $requests]);
+
 $conn->close();
 ?>

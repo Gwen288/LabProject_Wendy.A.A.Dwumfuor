@@ -15,6 +15,11 @@ checkAccess('student');
 </head>
 <body>
 
+<script>
+    // Make PHP session user_id available to JS
+    window.currentStudentId = <?= json_encode($_SESSION['user_id'] ?? null) ?>;
+</script>
+
 <!-- ===================== NAVIGATION BAR ====================== -->
 <nav class="navbar">
     <div class="nav-container">

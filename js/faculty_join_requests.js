@@ -1,47 +1,66 @@
 const requestsTable = document.querySelector('#JoinRequests tbody');
 
 async function loadJoinRequests() {
-    const res = await fetch('../php/faculty_join_requests.php');
-    const data = await res.json();
+    try {
+        const res = await fetch('../php/faculty_join_requests.php');
+        const data = await res.json();
 
-    requestsTable.innerHTML = '';
-    if (data.status !== 'success') return;
+        requestsTable.innerHTML = '';
+        if (data.status !== 'success') return;
 
-    data.requests.forEach(req => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td>${req.student_name}</td>
-            <td>${req.course_name}</td>
-            <td>${req.request_reason}</td>
-            <td>
-                <button class="approve-btn">Approve</button>
-                <button class="reject-btn">Reject</button>
-            </td>
-        `;
+        data.requests.forEach(req => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${req.student_name}</td>
+                <td>${req.course_name}</td>
+                <td>${req.request_reason}</td>
+                <td>
+                    <button class="approve-btn">Approve</button>
+                    <button class="reject-btn">Reject</button>
+                </td>
+            `;
 
-        // Approve
-        tr.querySelector('.approve-btn').addEventListener('click', () => updateRequest(req.student_id, req.course_id, 'enrolled'));
+            // Approve
+            tr.querySelector('.approve-btn').addEventListener('click', async () => {
+                await updateRequest(req.student_id, req.course_id, 'enrolled');
+            });
 
-        // Reject
-        tr.querySelector('.reject-btn').addEventListener('click', () => updateRequest(req.student_id, req.course_id, 'rejected'));
+            // Reject
+            tr.querySelector('.reject-btn').addEventListener('click', async () => {
+                await updateRequest(req.student_id, req.course_id, 'rejected');
+            });
 
-        requestsTable.appendChild(tr);
-    });
+            requestsTable.appendChild(tr);
+        });
+    } catch (err) {
+        console.error('Failed to load join requests:', err);
+    }
 }
 
 async function updateRequest(student_id, course_id, status) {
-    const res = await fetch('../php/update_join_request.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ student_id, course_id, status })
-    });
-    const result = await res.json();
+    try {
+        const res = await fetch('../php/update_join_request.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ student_id, course_id, status })
+        });
+        const result = await res.json();
 
-    if (result.status === 'success') {
-        alert(`Request ${status === 'enrolled' ? 'approved' : 'rejected'}!`);
-        loadJoinRequests(); // refresh table
-    } else {
-        alert('Failed: ' + result.msg);
+        if (result.status === 'success') {
+            Swal.fire({
+                title: 'Success',
+                text: `Request ${status === 'enrolled' ? 'approved' : 'rejected'}!`,
+                icon: 'success',
+                timer: 1500,
+                showConfirmButton: false
+            });
+            loadJoinRequests(); // refresh table
+        } else {
+            Swal.fire({ title: 'Error', text: result.msg || 'Failed to update request', icon: 'error' });
+        }
+    } catch (err) {
+        console.error('Update failed:', err);
+        Swal.fire({ title: 'Error', text: 'Something went wrong', icon: 'error' });
     }
 }
 
