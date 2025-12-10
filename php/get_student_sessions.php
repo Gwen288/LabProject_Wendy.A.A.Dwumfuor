@@ -3,38 +3,33 @@ header('Content-Type: application/json');
 require 'connection.php';
 session_start();
 
-$facultyId = $_SESSION['user_id'] ?? 0;
-if (!$facultyId) {
-    echo json_encode(['status'=>'error','msg'=>'Faculty not logged in']);
+$studentId = $_SESSION['user_id'] ?? 0;
+if (!$studentId) {
+    echo json_encode(['status' => 'error', 'msg' => 'Student not logged in']);
     exit;
 }
 
 try {
     $sql = "
         SELECT s.session_id, s.topic, s.location, s.start_time, s.end_time, s.session_date,
-               c.course_name, c.course_code
-        FROM sessions s
+               c.course_code, c.course_name
+        FROM course_student_list cs
+        JOIN sessions s ON cs.course_id = s.course_id
         JOIN courses c ON s.course_id = c.course_id
-        WHERE c.faculty_id = ?
-        ORDER BY s.session_date ASC
+        WHERE cs.student_id = ? AND cs.status = 'enrolled'
+        ORDER BY s.session_date ASC, s.start_time ASC
     ";
 
     $stmt = $conn->prepare($sql);
     if (!$stmt) throw new Exception($conn->error);
 
-    $stmt->bind_param("i", $facultyId);
+    $stmt->bind_param("i", $studentId);
     $stmt->execute();
     $result = $stmt->get_result();
 
     $sessions = [];
     while ($row = $result->fetch_assoc()) {
-        $sessions[] = [
-            'session_id' => $row['session_id'],
-            'course_code' => $row['course_code'],
-            'course_name' => $row['course_name'],
-            'topic' => $row['topic'],
-            'session_date' => $row['session_date']
-        ];
+        $sessions[] = $row;
     }
 
     echo json_encode(['status'=>'success','sessions'=>$sessions]);
@@ -45,3 +40,4 @@ try {
 } catch(Exception $e) {
     echo json_encode(['status'=>'error','msg'=>$e->getMessage()]);
 }
+?>

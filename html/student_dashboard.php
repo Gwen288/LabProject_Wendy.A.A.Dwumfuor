@@ -91,36 +91,27 @@ checkAccess('student');
 
 <!-- ========================= SESSION SCHEDULE ============================== -->
 <section id="SessionSchedule" class="section">
-    <div class="section-header">
-        <h3>Session Schedule</h3>
-    </div>
+    <h3>My Session Schedule</h3>
 
     <div class="table-container">
         <table class="styled-table">
             <thead>
                 <tr>
-                    <th>Course</th>
+                    <th>Course Code</th>
+                    <th>Course Name</th>
                     <th>Topic</th>
                     <th>Location</th>
                     <th>Date</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
+                    <th>Time</th>
                 </tr>
             </thead>
-            <tbody id="sessionScheduleTable">
-                <!-- dynamically loaded sessions -->
-                <tr>
-                    <td>CS101</td>
-                    <td>Variables & Loops</td>
-                    <td>Room 201</td>
-                    <td>2025-12-10</td>
-                    <td>10:00 AM</td>
-                    <td>12:00 PM</td>
-                </tr>
+            <tbody id="sessionTableBody">
+                <!-- JS will fill this -->
             </tbody>
         </table>
     </div>
 </section>
+
 
 <hr>
 
