@@ -52,14 +52,14 @@ if (password_verify($password, $hash)) {
 
     $redirect='';
     if($_SESSION['u_role']==='student'){
-        $redirect='../html/student_dashboard';
+        $redirect='../html/student_dashboard.php';
 
     }
     else if($_SESSION['u_role']==='faculty'){
-        $redirect='../html/faculty_dashboard';
+        $redirect='../html/faculty_dashboard.php';
 
     }else{
-        $redirect='../html/facultyIntern_dashboard';
+        $redirect='../html/facultyIntern_dashboard.php';
     }
 
 
