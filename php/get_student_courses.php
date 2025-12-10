@@ -2,6 +2,7 @@
 header('Content-Type: application/json');
 require 'connection.php';
 
+// Get student_id from GET
 $student_id = trim($_GET['student_id'] ?? '');
 if (!$student_id) {
     echo json_encode(['status' => 'error', 'msg' => 'Student ID required']);
@@ -10,11 +11,12 @@ if (!$student_id) {
 
 // Fetch only pending or enrolled courses
 $stmt = $conn->prepare("
-    SELECT c.course_id, c.course_name, f.name AS instructor, cs.status, cs.role
+    SELECT c.course_id, c.course_code, c.course_name, f.name AS instructor_name, cs.status, cs.role
     FROM course_student_list cs
     JOIN courses c ON cs.course_id = c.course_id
     JOIN faculty f ON c.faculty_id = f.faculty_id
     WHERE cs.student_id = ? AND cs.status IN ('pending', 'enrolled')
+    ORDER BY c.course_code
 ");
 $stmt->bind_param("i", $student_id);
 $stmt->execute();
